@@ -1,0 +1,96 @@
+Started by user admin
+Obtained pytest_pipeline.jenkins from git https://github.com/phanivarmabh/cicd_pipeline.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/cicd_pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/phanivarmabh/cicd_pipeline.git
+ > git init /var/jenkins_home/workspace/cicd_pipeline # timeout=10
+Fetching upstream changes from https://github.com/phanivarmabh/cicd_pipeline.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- https://github.com/phanivarmabh/cicd_pipeline.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/phanivarmabh/cicd_pipeline.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 524f62761f2816ebfe3c10589d231b673df26f63 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 524f62761f2816ebfe3c10589d231b673df26f63 # timeout=10
+Commit message: "Initial commit"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] echo
+Building pytest project
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (install req)
+[Pipeline] echo
+Install requirements
+[Pipeline] sh
++ pip install -r requirements.txt
+Requirement already satisfied: unittest2 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 1)) (1.1.0)
+Requirement already satisfied: xmlrunner in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 2)) (1.7.7)
+Requirement already satisfied: pytest==7.3.1 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 3)) (7.3.1)
+Requirement already satisfied: PyMySQL==1.0.3 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 4)) (1.0.3)
+Requirement already satisfied: pymssql==2.2.7 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 5)) (2.2.7)
+Requirement already satisfied: tomli==2.0.1 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 6)) (2.0.1)
+Requirement already satisfied: wheel==0.40.0 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 7)) (0.40.0)
+Requirement already satisfied: pip==23.1 in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 8)) (23.1)
+Requirement already satisfied: iniconfig in /usr/local/lib/python3.9/dist-packages (from pytest==7.3.1->-r requirements.txt (line 3)) (2.0.0)
+Requirement already satisfied: packaging in /usr/local/lib/python3.9/dist-packages (from pytest==7.3.1->-r requirements.txt (line 3)) (23.0)
+Requirement already satisfied: pluggy<2.0,>=0.12 in /usr/local/lib/python3.9/dist-packages (from pytest==7.3.1->-r requirements.txt (line 3)) (1.0.0)
+Requirement already satisfied: exceptiongroup>=1.0.0rc8 in /usr/local/lib/python3.9/dist-packages (from pytest==7.3.1->-r requirements.txt (line 3)) (1.1.1)
+Collecting argparse (from unittest2->-r requirements.txt (line 1))
+  Using cached argparse-1.4.0-py2.py3-none-any.whl (23 kB)
+Requirement already satisfied: six>=1.4 in /usr/local/lib/python3.9/dist-packages (from unittest2->-r requirements.txt (line 1)) (1.16.0)
+Requirement already satisfied: traceback2 in /usr/local/lib/python3.9/dist-packages (from unittest2->-r requirements.txt (line 1)) (1.4.0)
+Requirement already satisfied: linecache2 in /usr/local/lib/python3.9/dist-packages (from traceback2->unittest2->-r requirements.txt (line 1)) (1.0.0)
+Installing collected packages: argparse
+Successfully installed argparse-1.4.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] echo
+Automated tests on TRN DB
+[Pipeline] sh
++ python3 -m pytest -v -s test_trn_db.py
+============================= test session starts ==============================
+platform linux -- Python 3.9.2, pytest-7.3.1, pluggy-1.0.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /var/jenkins_home/workspace/cicd_pipeline
+collecting ... collected 2 items
+
+test_trn_db.py::test_hire_date PASSED
+test_trn_db.py::test_min_max_sal PASSED
+
+============================== 2 passed in 1.05s ===============================
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] echo
+Deploy TRN DB changes
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
