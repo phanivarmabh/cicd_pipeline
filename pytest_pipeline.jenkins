@@ -24,7 +24,7 @@ pipeline{
 		
 		stage('Deploy - Staging'){
 			steps{
-				sh './deploy staging'
+				sh './run_py_tests'
 				echo 'Deploy TRN DB changes'
 			}
 		}
