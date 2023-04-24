@@ -22,8 +22,9 @@ pipeline{
 			}
 		}
 		
-		stage('Deploy'){
+		stage('Deploy - Staging'){
 			steps{
+				sh './deploy staging'
 				echo 'Deploy TRN DB changes'
 			}
 		}

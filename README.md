@@ -50,3 +50,17 @@ git push origin main
 6. Click on Build Now button 
 7. Build should be successful
 ```
+
+**How to run tests**
+```
+1. Open Jenkins localhost:8080
+2. Click on "New Item".
+3. Enter the <Name of the pipeline> and click on Pipeline and Ok button.
+4. Navigate to pipeline and select "Pipeline script from SCM" in Definition.
+5. Select "Git" in SCM dropdown.
+6. Enter the repository URL "https://github.com/phanivarmabh/cicd_pipeline".
+7. Mention Branch specifier as */main.
+8. At the bottom mention the script path as "pytest_pipeline.jenkins" 
+9. Click on Save button to save the pipeline setup.
+10.Click on "Build Now" button to run the pipeline.
+```
